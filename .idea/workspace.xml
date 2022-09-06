@@ -11,6 +11,12 @@
       <change afterPath="$PROJECT_DIR$/../Download/import org.apache.commons.validator.routines.EmailValidator/commons-logging-1.2.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Download/import org.apache.commons.validator.routines.EmailValidator/commons-validator-1.6.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../malwart - Copy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/EnterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/EnterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/enter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/enter.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/EnterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/EnterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/enter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/enter.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +31,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2EP3iHy5Ep2EGzwoN09ziXSFH1e" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -36,7 +42,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Exercise/5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ATM" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -85,5 +91,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
