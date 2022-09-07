@@ -11,7 +11,6 @@
       <change afterPath="$PROJECT_DIR$/../Download/import org.apache.commons.validator.routines.EmailValidator/commons-logging-1.2.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Download/import org.apache.commons.validator.routines.EmailValidator/commons-validator-1.6.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../malwart - Copy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/EnterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/EnterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/enter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/enter.fxml" afterDir="false" />
