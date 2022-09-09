@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="620.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
+   <children>
+      <Button layoutX="126.0" layoutY="557.0" mnemonicParsing="false" onAction="#add" text="Add" />
+      <TextField fx:id="status1" layoutX="29.0" layoutY="43.0" prefHeight="26.0" prefWidth="110.0" />
+      <TextField fx:id="start1" layoutX="152.0" layoutY="44.0" prefHeight="26.0" prefWidth="60.0" />
+      <TextField fx:id="end1" layoutX="223.0" layoutY="44.0" prefHeight="26.0" prefWidth="60.0" />
+   </children>
+</AnchorPane>
