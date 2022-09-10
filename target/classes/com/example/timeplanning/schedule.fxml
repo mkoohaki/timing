@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="620.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
+<AnchorPane fx:id="scene" prefHeight="620.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
    <children>
       <Button layoutX="126.0" layoutY="557.0" mnemonicParsing="false" onAction="#add" text="Add" />
       <TextField fx:id="status1" layoutX="29.0" layoutY="43.0" prefHeight="26.0" prefWidth="110.0" />

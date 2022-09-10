@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -24,15 +25,15 @@ public class ScheduleController {
     @FXML
     protected void add(ActionEvent event) throws Exception {
         try {
-            TextField textField = new TextField();
-            textField.setText("click");
-            StackPane layout = new StackPane();
-
-            layout.getChildren().add(textField);
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+
+    @FXML
+    TableView table;
+
+
 
 }
