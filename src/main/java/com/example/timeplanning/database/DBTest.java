@@ -5,8 +5,7 @@ public class DBTest {
     public static void main(String[] args) {
         try {
             AccountDatabase db = new AccountDatabase();
-            int numRows = db.insertRow("Coding", "19:45", "21:00");
-            //System.out.println("Num rows = " + numRows);
+            db.insertRow("Coding", "19:45", "21:00");
             System.out.println("Success!");
         }
         catch (java.sql.SQLException e) {
