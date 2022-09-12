@@ -12,12 +12,13 @@
       <change afterPath="$PROJECT_DIR$/../Download/import org.apache.commons.validator.routines.EmailValidator/commons-validator-1.6.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../malwart - Copy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/AccountDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/AccountDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/DBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/DBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/schedule.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/schedule.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/AccountDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/AccountDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/DBTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/DBTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/schedule.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/schedule.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ATM" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -52,7 +53,7 @@
       <recent name="C:\HardDrive\College\Java\TImePlanning\src\main\java\com\example\timeplanning\interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DBTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="DBTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.timeplanning.database.DBTest" />
       <module name="TimePlanning" />
@@ -81,8 +82,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DBTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.DBTest" />
       </list>
     </recent_temporary>
   </component>

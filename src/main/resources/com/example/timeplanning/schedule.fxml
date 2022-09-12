@@ -12,12 +12,12 @@
       <TextField fx:id="status1" layoutX="25.0" layoutY="566.0" prefHeight="26.0" prefWidth="118.0" />
       <TextField fx:id="start1" layoutX="156.0" layoutY="567.0" prefHeight="26.0" prefWidth="38.0" />
       <TextField fx:id="end1" layoutX="206.0" layoutY="567.0" prefHeight="26.0" prefWidth="38.0" />
-      <TableView fx:id="table" layoutX="25.0" layoutY="26.0" prefHeight="200.0" prefWidth="273.0">
+      <TableView layoutX="25.0" layoutY="26.0" prefHeight="200.0" prefWidth="273.0">
         <columns>
-          <TableColumn fx:id="activity" prefWidth="124.79998779296875" text="C1" />
-          <TableColumn fx:id="start" prefWidth="50.4000244140625" text="C2" />
-            <TableColumn fx:id="finish" prefWidth="52.0" text="C2" />
-            <TableColumn fx:id="edit" prefWidth="47.199951171875" text="C2" />
+          <TableColumn prefWidth="75.0" text="ACTIVITY" />
+          <TableColumn prefWidth="75.0" text="START" />
+            <TableColumn prefWidth="75.0" text="END" />
+            <TableColumn prefWidth="47.199990844726585" text="EDIT" />
         </columns>
       </TableView>
    </children>

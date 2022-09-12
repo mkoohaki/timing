@@ -15,6 +15,7 @@ public class AccountDatabase extends Database {
     ResultSet resultSet;
 
     public AccountDatabase() throws SQLException {
+        super();
     }
 
     @Override
