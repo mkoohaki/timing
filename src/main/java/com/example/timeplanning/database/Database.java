@@ -19,5 +19,6 @@ public abstract class Database {
         return connection;
     }
 
-    public abstract void insertRow(String...columns) throws SQLException;
+    public abstract int insertRow(String...columns) throws SQLException;
+    public abstract String[][] getAllRows(String...columns) throws SQLException;
 }

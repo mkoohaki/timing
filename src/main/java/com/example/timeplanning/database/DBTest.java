@@ -1,14 +1,27 @@
 package com.example.timeplanning.database;
 
+import java.sql.SQLException;
+
 public class DBTest {
 
     public static void main(String[] args) {
         try {
             AccountDatabase db = new AccountDatabase();
-            db.insertRow("Coding", "19:45", "21:00");
+            //db.insertRow("Coding", "19:45", "21:00");
+
+            String[][] rows = db.getAllRows();
+            int row = 0;
+            for(String[] columns : rows) {
+                row++;
+                System.out.println("Row # " + row);
+                int columnCounter = 0;
+                for(String column : columns) {
+                    System.out.printf("Column # %d has value of %s%n", columnCounter, column);
+                }
+            }
             System.out.println("Success!");
         }
-        catch (java.sql.SQLException e) {
+        catch (SQLException e) {
             System.out.println("Connection failed! " + e);
         }
     }
