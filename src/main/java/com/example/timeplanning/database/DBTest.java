@@ -1,6 +1,7 @@
 package com.example.timeplanning.database;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class DBTest {
 
@@ -19,9 +20,11 @@ public class DBTest {
                     System.out.printf("Column # %d has value of %s%n", columnCounter, column);
                 }
             }
+//            String[] column = db.getAllColumns();
+//            System.out.println(Arrays.toString(column));
             System.out.println("Success!");
         }
-        catch (SQLException e) {
+        catch (SQLException | NullPointerException e) {
             System.out.println("Connection failed! " + e);
         }
     }

@@ -2,14 +2,13 @@ package com.example.timeplanning.database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.*;
 
 public class AccountDatabase extends Database {
-    private final String table = "activity_info";
-    private final int numColumns = 4;
-    private final int maxRowsReturned = 9;
-    private final String pkId = "id";
+    private final String TABLE = "activity_info";
+    private final int NUMBEROFCOLUMNS = 3;
+    private final int MAXROWSRETURNED = 9;
+    private final String PKID = "activity";
     Connection connection = getConnection();
     Statement statement = connection.createStatement();
     ObservableList<ModelTable> observableList = FXCollections.observableArrayList();
@@ -21,7 +20,7 @@ public class AccountDatabase extends Database {
 
     @Override
     public int insertRow(String... columns) throws SQLException {
-        String sql = String.format("INSERT INTO `%s` (`activity`, `start`, `end`) VALUE (?, ?, ?)", table);
+        String sql = String.format("INSERT INTO `%s` (`activity`, `start`, `end`) VALUE (?, ?, ?)", TABLE);
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
         prepareStatement.setString(1, columns[0]);
@@ -33,9 +32,10 @@ public class AccountDatabase extends Database {
     }
 
     @Override
-    public String[][] getAllRows(String... columns) throws SQLException {
-        String[][] data = new String[maxRowsReturned][numColumns];
-        String sql = String.format("SELECT * FROM `%s` ORDER BY `%s` LIMIT %d", table, pkId, maxRowsReturned);
+    public String[][] getAllRows() throws SQLException {
+
+        String[][] data = new String[MAXROWSRETURNED][NUMBEROFCOLUMNS];
+        String sql = String.format("SELECT * FROM `%s` ORDER BY `%s` LIMIT %d", TABLE, PKID, MAXROWSRETURNED);
         statement = connection.createStatement();
         statement.executeQuery(sql);
 
@@ -44,7 +44,22 @@ public class AccountDatabase extends Database {
             row++;
             for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
                 data[row - 1][i - 1] = resultSet.getObject(i).toString();
+            }
+        }
+        return data;
+    }
 
+    @Override
+    public String[] getAllColumns() throws SQLException {
+        String[] data = new String[NUMBEROFCOLUMNS];
+//        String sql = "SELECT * FROM" + table + "ORDER By " + pkId + "LIMIT " + maxRowsReturned;
+        String sql = String.format("SELECT * FROM `%s` ORDER BY `%s` LIMIT %d", TABLE, PKID, MAXROWSRETURNED);
+        statement = connection.createStatement();
+        statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                data[i - 1] = resultSet.getMetaData().getColumnName(i);
             }
         }
         return data;

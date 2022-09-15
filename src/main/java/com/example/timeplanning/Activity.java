@@ -1,4 +1,4 @@
-package com.example.timeplanning.tableView;
+package com.example.timeplanning;
 
 public class Activity {
 
