@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class ScheduleController implements Initializable {
@@ -33,7 +34,7 @@ public class ScheduleController implements Initializable {
     Button add;
 
     TableView<Activity> table;
-
+    final ObservableList<Activity> data = FXCollections.observableArrayList();
 
     @FXML
     protected void add(ActionEvent event) throws Exception {
@@ -42,6 +43,7 @@ public class ScheduleController implements Initializable {
             activityText.setText("");
             startText.setText("");
             endText.setText("");
+            refreshTable();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -51,8 +53,10 @@ public class ScheduleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        BorderPane root = new BorderPane();
-//
+        creatingTable();
+    }
+
+    public void creatingTable() {
         TableColumn<Activity, String> activityColumn = new TableColumn<>("Activity");
         activityColumn.setMinWidth(150);
         activityColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
@@ -76,20 +80,25 @@ public class ScheduleController implements Initializable {
         }
 
         table.getColumns().addAll(activityColumn, startColumn, endColumn, actionColumn);
-//
         scene.getChildren().addAll(table);
     }
 
     public ObservableList<Activity> getActivity() throws SQLException {
-       ObservableList<Activity> activities = FXCollections.observableArrayList();
+
+        ObservableList<Activity> activities = FXCollections.observableArrayList();
 
         AccountDatabase db = new AccountDatabase();
         String[][] rows = db.getAllRows();
-        System.out.println(Arrays.toString(rows));
-        for(int i=0; i<rows.length; i++) {
-            for(int j=0; j<rows[i].length; j++) {
-                activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
+        Arrays.sort(rows, new Comparator<>() {
+            @Override
+            public int compare(final String[] entry1, final String[] entry2) {
+                final String time1 = entry1[1];
+                final String time2 = entry2[1];
+                return time1.compareTo(time2);
             }
+        });
+        for(int i=0; i<rows.length; i++) {
+            activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
         }
         return activities;
     }
@@ -97,5 +106,10 @@ public class ScheduleController implements Initializable {
     public void saveActivity(String activity, String start, String end) throws SQLException {
         AccountDatabase db = new AccountDatabase();
         db.insertRow(activity, start, end);
+    }
+
+    public void refreshTable() {
+        data.clear();
+        creatingTable();
     }
 }

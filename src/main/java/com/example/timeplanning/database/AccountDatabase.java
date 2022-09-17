@@ -37,7 +37,7 @@ public class AccountDatabase extends Database {
         String[][] data = new String[MAXROWSRETURNED][NUMBEROFCOLUMNS];
         String sql = String.format("SELECT * FROM `%s` ORDER BY `%s` LIMIT %d", TABLE, PKID, MAXROWSRETURNED);
         statement = connection.createStatement();
-        statement.executeQuery(sql);
+        resultSet = statement.executeQuery(sql);
 
         int row = 0;
         while (resultSet.next()) {
