@@ -1,7 +1,6 @@
 package com.example.timeplanning;
 
 import com.example.timeplanning.database.AccountDatabase;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,8 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -85,22 +82,33 @@ public class ScheduleController implements Initializable {
 
     public ObservableList<Activity> getActivity() throws SQLException {
 
-        ObservableList<Activity> activities = FXCollections.observableArrayList();
+        try {
+            ObservableList<Activity> activities = FXCollections.observableArrayList();
 
-        AccountDatabase db = new AccountDatabase();
-        String[][] rows = db.getAllRows();
-        Arrays.sort(rows, new Comparator<>() {
-            @Override
-            public int compare(final String[] entry1, final String[] entry2) {
-                final String time1 = entry1[1];
-                final String time2 = entry2[1];
-                return time1.compareTo(time2);
+            AccountDatabase db = new AccountDatabase();
+            String[][] rows = db.getAllRows();
+
+            final String[][] data = null;
+            for(int i =0; i<rows[i].length; i++){
+                data[i] = rows[i];
             }
-        });
-        for(int i=0; i<rows.length; i++) {
-            activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
+            Arrays.sort(data, new Comparator<>() {
+
+                @Override
+                public int compare(String[] entry1, String[] entry2) {
+                    String time1 = entry1[0];
+                    String time2 = entry2[0];
+                    return time1.compareTo(time2);
+                }
+            });
+            for (int i = 0; i < rows.length; i++) {
+                activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
+            }
+            return activities;
+        } catch(Exception e) {
+            System.out.println("Error: " + e);
+            return null;
         }
-        return activities;
     }
 
     public void saveActivity(String activity, String start, String end) throws SQLException {

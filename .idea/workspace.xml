@@ -22,9 +22,7 @@
       <change afterPath="$PROJECT_DIR$/../malwart - Copy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/AccountDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/database/AccountDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/AccountDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/database/AccountDatabase.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
