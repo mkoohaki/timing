@@ -6,18 +6,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.*;
 
 public class ScheduleController implements Initializable {
 
@@ -32,11 +31,15 @@ public class ScheduleController implements Initializable {
 
     TableView<Activity> table;
     final ObservableList<Activity> data = FXCollections.observableArrayList();
+    Alert a = new Alert(Alert.AlertType.NONE);
 
     @FXML
     protected void add(ActionEvent event) throws Exception {
         try {
-            saveActivity(activityText.getText(), startText.getText(), endText.getText());
+
+            if(checkActivity(activityText.getText(), startText.getText(), endText.getText())) {
+                saveActivity(activityText.getText(), startText.getText(), endText.getText());
+            }
             activityText.setText("");
             startText.setText("");
             endText.setText("");
@@ -44,6 +47,42 @@ public class ScheduleController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    private boolean checkActivity(String activity, String start, String end) throws SQLException {
+
+        AccountDatabase db = new AccountDatabase();
+        String[][] rows = db.getAllRows();
+
+        if(activity.equals("") || start.equals("") || end.equals("")) {
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Please fill out the form");
+            a.show();
+            return false;
+        }
+        for (String[] row : rows) {
+            if (Objects.equals(row[0], activity)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Activity already exists");
+                a.show();
+                return false;
+            } else if (Objects.equals(row[1], start)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Time has interruption");
+                a.show();
+                return false;
+            } else if (Objects.equals(row[2], end)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Time has interruption");
+                a.show();
+                return false;
+            }
+
+        }
+
+
+        return true;
+
     }
 
 
@@ -88,19 +127,42 @@ public class ScheduleController implements Initializable {
             AccountDatabase db = new AccountDatabase();
             String[][] rows = db.getAllRows();
 
-            final String[][] data = null;
-            for(int i =0; i<rows[i].length; i++){
-                data[i] = rows[i];
-            }
-            Arrays.sort(data, new Comparator<>() {
+//            ArrayList<LocalTime> list = new ArrayList<>();
+//            LocalTime time;
+//            for (String[] row : rows) {
+//                time = LocalTime.parse(row[1]);
+//                list.add(time);
+//            }
+//            System.out.println(list);
+//
+//            Collections.sort(list);
+//            String[][] rows1 = new String[rows.length][3];
+//
+//            for(int i = 0; i<rows.length; i++) {
+//                for (int j = 0; j < rows.length; j++) {
+//                    if(Objects.equals(list.get(i).toString(), rows[j][1])){
+//                        rows1[i] = rows[j];
+//                    }
+//                }
+//            }
+//
+//
 
-                @Override
-                public int compare(String[] entry1, String[] entry2) {
-                    String time1 = entry1[0];
-                    String time2 = entry2[0];
-                    return time1.compareTo(time2);
-                }
-            });
+
+//
+//            final String[][] data = null;
+//            for(int i =0; i<rows[i].length; i++){
+//                data[i] = rows[i];
+//            }
+//            Arrays.sort(data, new Comparator<>() {
+//
+//                @Override
+//                public int compare(String[] entry1, String[] entry2) {
+//                    String time1 = entry1[0];
+//                    String time2 = entry2[0];
+//                    return time1.compareTo(time2);
+//                }
+//            });
             for (int i = 0; i < rows.length; i++) {
                 activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
             }
