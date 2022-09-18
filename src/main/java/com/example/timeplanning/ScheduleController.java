@@ -77,7 +77,12 @@ public class ScheduleController implements Initializable {
                 a.show();
                 return false;
             }
-
+        }
+        if (start.equals(end)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Time has interruption");
+                a.show();
+                return false;
         }
 
 
@@ -126,16 +131,22 @@ public class ScheduleController implements Initializable {
 
             AccountDatabase db = new AccountDatabase();
             String[][] rows = db.getAllRows();
+            String[][] newRows = rows;
 
-//            ArrayList<LocalTime> list = new ArrayList<>();
-//            LocalTime time;
-//            for (String[] row : rows) {
-//                time = LocalTime.parse(row[1]);
-//                list.add(time);
-//            }
-//            System.out.println(list);
-//
-//            Collections.sort(list);
+            System.out.println("1");
+            TreeMap<LocalTime, Integer> map = new TreeMap<>();
+            System.out.println("2");
+
+            LocalTime time;
+            System.out.println("3");
+
+            for (int i=0; i<rows.length; i++) {
+
+                time = LocalTime.of(Integer.parseInt(rows[i][1].substring(0,2)), Integer.parseInt(rows[i][1].substring(3)));
+
+                map.put(time, i);
+            }
+
 //            String[][] rows1 = new String[rows.length][3];
 //
 //            for(int i = 0; i<rows.length; i++) {
@@ -163,8 +174,10 @@ public class ScheduleController implements Initializable {
 //                    return time1.compareTo(time2);
 //                }
 //            });
-            for (int i = 0; i < rows.length; i++) {
-                activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
+            for (Map.Entry<LocalTime,Integer> entry : map.entrySet()) {
+                System.out.println(entry);
+                Integer value = entry.getValue();
+                activities.add(new Activity(rows[value][0], rows[value][1], rows[value][2]));
             }
             return activities;
         } catch(Exception e) {
