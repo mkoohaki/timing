@@ -8,6 +8,7 @@ public class AccountDatabase extends Database {
     private final String TABLE = "activity_info";
     private final int NUMBEROFCOLUMNS = 3;
     private final int MAXROWSRETURNED = 9;
+    private final String ORDERING = "start";
     private final String PKID = "activity";
     Connection connection = getConnection();
     Statement statement = connection.createStatement();
@@ -35,7 +36,7 @@ public class AccountDatabase extends Database {
     public String[][] getAllRows() throws SQLException {
 
         String[][] data = new String[MAXROWSRETURNED][NUMBEROFCOLUMNS];
-        String sql = String.format("SELECT * FROM `%s` ORDER BY `%s` LIMIT %d", TABLE, PKID, MAXROWSRETURNED);
+        String sql = String.format("SELECT * FROM `%s` ORDER BY `%s`", TABLE, ORDERING);
         statement = connection.createStatement();
         resultSet = statement.executeQuery(sql);
 

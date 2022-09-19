@@ -38,7 +38,7 @@ public class ScheduleController implements Initializable {
         try {
 
             if(checkActivity(activityText.getText(), startText.getText(), endText.getText())) {
-                saveActivity(activityText.getText(), startText.getText(), endText.getText());
+                //saveActivity(activityText.getText(), startText.getText(), endText.getText());
             }
             activityText.setText("");
             startText.setText("");
@@ -85,9 +85,36 @@ public class ScheduleController implements Initializable {
                 return false;
         }
 
+//        LocalTime time2 = LocalTime.of(Integer.parseInt("09"), Integer.parseInt("30"));
+//
+//        if(time1.isBefore(time2)){
+//            System.out.println("Correct");
+//        }
+        Map<LocalTime, LocalTime> treeMap = new TreeMap<>();
+        LocalTime sTime, eTime;
+        for (int i=0; i<rows.length; i++) {
+            if(rows[i][1] != null) {
+                String[] arrOfStart = rows[i][1].split(":");
+                sTime = LocalTime.of(Integer.parseInt(arrOfStart[0]), Integer.parseInt(arrOfStart[1]));
+
+                String[] arrOfEnd = rows[i][2].split(":");
+                eTime = LocalTime.of(Integer.parseInt(arrOfEnd[0]), Integer.parseInt(arrOfEnd[1]));
+                treeMap.put(sTime, eTime);
+            }
+        }
+        String[] arrOfStart = start.split(":");
+        LocalTime timeStart = LocalTime.of(Integer.parseInt(arrOfStart[0]), Integer.parseInt(arrOfStart[1]));
+        String[] arrOfSEnd = start.split(":");
+        LocalTime timeEnd = LocalTime.of(Integer.parseInt(arrOfSEnd[0]), Integer.parseInt(arrOfSEnd[1]));
+
+        for (Map.Entry<LocalTime, LocalTime> time : treeMap.entrySet()) {
+            if(time.getValue().isBefore(timeStart)){
+
+            }
+        }
+
 
         return true;
-
     }
 
 
@@ -128,56 +155,11 @@ public class ScheduleController implements Initializable {
 
         try {
             ObservableList<Activity> activities = FXCollections.observableArrayList();
-
             AccountDatabase db = new AccountDatabase();
             String[][] rows = db.getAllRows();
-            String[][] newRows = rows;
 
-            System.out.println("1");
-            TreeMap<LocalTime, Integer> map = new TreeMap<>();
-            System.out.println("2");
-
-            LocalTime time;
-            System.out.println("3");
-
-            for (int i=0; i<rows.length; i++) {
-
-                time = LocalTime.of(Integer.parseInt(rows[i][1].substring(0,2)), Integer.parseInt(rows[i][1].substring(3)));
-
-                map.put(time, i);
-            }
-
-//            String[][] rows1 = new String[rows.length][3];
-//
-//            for(int i = 0; i<rows.length; i++) {
-//                for (int j = 0; j < rows.length; j++) {
-//                    if(Objects.equals(list.get(i).toString(), rows[j][1])){
-//                        rows1[i] = rows[j];
-//                    }
-//                }
-//            }
-//
-//
-
-
-//
-//            final String[][] data = null;
-//            for(int i =0; i<rows[i].length; i++){
-//                data[i] = rows[i];
-//            }
-//            Arrays.sort(data, new Comparator<>() {
-//
-//                @Override
-//                public int compare(String[] entry1, String[] entry2) {
-//                    String time1 = entry1[0];
-//                    String time2 = entry2[0];
-//                    return time1.compareTo(time2);
-//                }
-//            });
-            for (Map.Entry<LocalTime,Integer> entry : map.entrySet()) {
-                System.out.println(entry);
-                Integer value = entry.getValue();
-                activities.add(new Activity(rows[value][0], rows[value][1], rows[value][2]));
+            for(int i=0; i<rows.length; i++) {
+                activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
             }
             return activities;
         } catch(Exception e) {
