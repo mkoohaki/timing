@@ -106,11 +106,37 @@ public class ScheduleController implements Initializable {
         LocalTime timeStart = LocalTime.of(Integer.parseInt(arrOfStart[0]), Integer.parseInt(arrOfStart[1]));
         String[] arrOfSEnd = start.split(":");
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(arrOfSEnd[0]), Integer.parseInt(arrOfSEnd[1]));
+//
+//        for (Map.Entry<LocalTime, LocalTime> time : treeMap.entrySet()) {
+//            if(time.getValue().isBefore(timeStart)){
+//
+//            }
+//        }
 
-        for (Map.Entry<LocalTime, LocalTime> time : treeMap.entrySet()) {
-            if(time.getValue().isBefore(timeStart)){
+        NavigableMap<LocalTime, LocalTime> myMap = new TreeMap<>();
+        for (int i=0; i<rows.length; i++) {
+            if(rows[i][1] != null) {
+                String[] arrOfStart1 = rows[i][1].split(":");
+                sTime = LocalTime.of(Integer.parseInt(arrOfStart1[0]), Integer.parseInt(arrOfStart1[1]));
 
+                String[] arrOfEnd1 = rows[i][2].split(":");
+                eTime = LocalTime.of(Integer.parseInt(arrOfEnd1[0]), Integer.parseInt(arrOfEnd1[1]));
+                myMap.put(sTime, eTime);
             }
+        }
+        for (Map.Entry<LocalTime, LocalTime> time : myMap.entrySet()) {
+            if(time.getValue().isBefore(timeStart)) {
+
+                Map.Entry<LocalTime, LocalTime> next = myMap.higherEntry(time.getKey()); // next
+                Map.Entry<LocalTime, LocalTime> prev = myMap.lowerEntry(time.getKey());  // previous
+//                System.out.println("next Key = " + next.getKey() +
+//                        ", next Value = " + next.getValue());
+                if(timeEnd.isAfter(next.getKey())) {
+                    a.setAlertType(Alert.AlertType.ERROR);
+                    a.setContentText("Time has interruption 2");
+                    a.show();
+                }
+            } 
         }
 
 
