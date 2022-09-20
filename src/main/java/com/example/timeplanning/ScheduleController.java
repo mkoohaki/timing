@@ -9,12 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -26,9 +22,6 @@ public class ScheduleController implements Initializable {
     @FXML
     AnchorPane scene;
 
-    @FXML
-    Button add;
-
     TableView<Activity> table;
     final ObservableList<Activity> data = FXCollections.observableArrayList();
     Alert a = new Alert(Alert.AlertType.NONE);
@@ -38,7 +31,7 @@ public class ScheduleController implements Initializable {
         try {
 
             if(checkActivity(activityText.getText(), startText.getText(), endText.getText())) {
-                //saveActivity(activityText.getText(), startText.getText(), endText.getText());
+                saveActivity(activityText.getText(), startText.getText(), endText.getText());
             }
             activityText.setText("");
             startText.setText("");
@@ -85,75 +78,41 @@ public class ScheduleController implements Initializable {
                 return false;
         }
 
-//        LocalTime time2 = LocalTime.of(Integer.parseInt("09"), Integer.parseInt("30"));
-//
-//        if(time1.isBefore(time2)){
-//            System.out.println("Correct");
-//        }
-        Map<LocalTime, LocalTime> treeMap = new TreeMap<>();
-        LocalTime sTime, eTime;
-        for (int i=0; i<rows.length; i++) {
-            if(rows[i][1] != null) {
-                String[] arrOfStart = rows[i][1].split(":");
-                sTime = LocalTime.of(Integer.parseInt(arrOfStart[0]), Integer.parseInt(arrOfStart[1]));
-
-                String[] arrOfEnd = rows[i][2].split(":");
-                eTime = LocalTime.of(Integer.parseInt(arrOfEnd[0]), Integer.parseInt(arrOfEnd[1]));
-                treeMap.put(sTime, eTime);
-            }
-        }
         String[] arrOfStart = start.split(":");
         LocalTime timeStart = LocalTime.of(Integer.parseInt(arrOfStart[0]), Integer.parseInt(arrOfStart[1]));
-        String[] arrOfSEnd = start.split(":");
+        String[] arrOfSEnd = end.split(":");
         LocalTime timeEnd = LocalTime.of(Integer.parseInt(arrOfSEnd[0]), Integer.parseInt(arrOfSEnd[1]));
-//
-//        for (Map.Entry<LocalTime, LocalTime> time : treeMap.entrySet()) {
-//            if(time.getValue().isBefore(timeStart)){
-//
-//            }
-//        }
+        String[] startRow, endRow;
+        LocalTime sTime, eTime;
 
-        NavigableMap<LocalTime, LocalTime> myMap = new TreeMap<>();
-        for (int i=0; i<rows.length; i++) {
-            if(rows[i][1] != null) {
-                String[] arrOfStart1 = rows[i][1].split(":");
-                sTime = LocalTime.of(Integer.parseInt(arrOfStart1[0]), Integer.parseInt(arrOfStart1[1]));
+        for (String[] row : rows) {
+            if (row[1] != null) {
+                startRow = row[1].split(":");
+                sTime = LocalTime.of(Integer.parseInt(startRow[0]), Integer.parseInt(startRow[1]));
 
-                String[] arrOfEnd1 = rows[i][2].split(":");
-                eTime = LocalTime.of(Integer.parseInt(arrOfEnd1[0]), Integer.parseInt(arrOfEnd1[1]));
+                endRow = row[2].split(":");
+                eTime = LocalTime.of(Integer.parseInt(endRow[0]), Integer.parseInt(endRow[1]));
 
-                myMap.put(sTime, eTime);
-            }
-        }
-        for (Map.Entry<LocalTime, LocalTime> time : myMap.entrySet()) {
-            if(time.getValue().isBefore(timeStart)) {
-
-                Map.Entry<LocalTime, LocalTime> next = myMap.higherEntry(time.getKey()); // next
-                Map.Entry<LocalTime, LocalTime> prev = myMap.lowerEntry(time.getKey());  // previous
-//                System.out.println("next Key = " + next.getKey() +
-//                        ", next Value = " + next.getValue());
-
-                if(timeEnd.isAfter(next.getKey())) {
+                if (sTime.isBefore(timeStart) && eTime.isAfter(timeStart)) {
                     a.setAlertType(Alert.AlertType.ERROR);
-                    a.setContentText("Time has interruption 2");
+                    a.setContentText("Time has interruption");
                     a.show();
+                    return false;
+                }
+                if (sTime.isBefore(timeEnd) && eTime.isAfter(timeEnd)) {
+                    a.setAlertType(Alert.AlertType.ERROR);
+                    a.setContentText("Time has interruption");
+                    a.show();
+                    return false;
+                }
+                if (sTime.isAfter(timeStart) && eTime.isBefore(timeEnd)) {
+                    a.setAlertType(Alert.AlertType.ERROR);
+                    a.setContentText("Time has interruption");
+                    a.show();
+                    return false;
                 }
             }
-
-            if(time.getKey().isBefore(timeStart) && time.getValue().isAfter(timeEnd) ||
-                time.getKey().isBefore(timeStart) && time.getValue().isAfter(timeStart)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Time has interruption 3");
-                a.show();
-            }
-
-            if(time.getKey().isAfter(timeStart) && time.getValue().isAfter(timeEnd)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Time has interruption 4");
-                a.show();
-            }
         }
-
 
         return true;
     }
