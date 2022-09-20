@@ -42,6 +42,16 @@ public class ScheduleController implements Initializable {
         }
     }
 
+    @FXML
+    protected void back(ActionEvent event) throws Exception {
+        try {
+            Partials.windowOpen("enter", "Timing Plan", 320, 320);
+            Partials.windowClose(event);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     private boolean checkActivity(String activity, String start, String end) throws SQLException {
 
         AccountDatabase db = new AccountDatabase();

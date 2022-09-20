@@ -4,11 +4,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="scene" prefHeight="620.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
+<AnchorPane fx:id="scene" prefHeight="620.0" prefWidth="320.0" style="-fx-background-color: LIGHTCYAN;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
    <children>
-      <Button layoutX="260.0" layoutY="567.0" mnemonicParsing="false" onAction="#add" text="Add" />
-      <TextField fx:id="activityText" layoutX="25.0" layoutY="566.0" prefHeight="26.0" prefWidth="118.0" />
-      <TextField fx:id="startText" layoutX="156.0" layoutY="567.0" prefHeight="26.0" prefWidth="38.0" />
-      <TextField fx:id="endText" layoutX="206.0" layoutY="567.0" prefHeight="26.0" prefWidth="38.0" />
+      <Button layoutX="270.0" layoutY="552.0" mnemonicParsing="false" onAction="#add" style="-fx-background-color: green;" text="Add" textFill="WHITE" />
+      <TextField fx:id="activityText" layoutX="11.0" layoutY="552.0" prefHeight="26.0" prefWidth="132.0" />
+      <TextField fx:id="startText" layoutX="148.0" layoutY="552.0" prefHeight="26.0" prefWidth="55.0" />
+      <TextField fx:id="endText" layoutX="209.0" layoutY="552.0" prefHeight="26.0" prefWidth="55.0" />
+      <Button layoutX="140.0" layoutY="587.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: orange;" text="Back" />
    </children>
 </AnchorPane>
