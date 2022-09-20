@@ -121,6 +121,7 @@ public class ScheduleController implements Initializable {
 
                 String[] arrOfEnd1 = rows[i][2].split(":");
                 eTime = LocalTime.of(Integer.parseInt(arrOfEnd1[0]), Integer.parseInt(arrOfEnd1[1]));
+
                 myMap.put(sTime, eTime);
             }
         }
@@ -131,12 +132,26 @@ public class ScheduleController implements Initializable {
                 Map.Entry<LocalTime, LocalTime> prev = myMap.lowerEntry(time.getKey());  // previous
 //                System.out.println("next Key = " + next.getKey() +
 //                        ", next Value = " + next.getValue());
+
                 if(timeEnd.isAfter(next.getKey())) {
                     a.setAlertType(Alert.AlertType.ERROR);
                     a.setContentText("Time has interruption 2");
                     a.show();
                 }
-            } 
+            }
+
+            if(time.getKey().isBefore(timeStart) && time.getValue().isAfter(timeEnd) ||
+                time.getKey().isBefore(timeStart) && time.getValue().isAfter(timeStart)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Time has interruption 3");
+                a.show();
+            }
+
+            if(time.getKey().isAfter(timeStart) && time.getValue().isAfter(timeEnd)) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Time has interruption 4");
+                a.show();
+            }
         }
 
 
