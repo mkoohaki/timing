@@ -7,7 +7,7 @@ import java.sql.*;
 public class AccountDatabase extends Database {
     private final String TABLE = "activity_info";
     private final int NUMBEROFCOLUMNS = 3;
-    private final int MAXROWSRETURNED = 9;
+    private final int MAXROWSRETURNED = 20;
     private final String ORDERING = "start";
     private final String PKID = "activity";
     Connection connection = getConnection();
