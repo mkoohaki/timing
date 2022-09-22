@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="320.0" prefWidth="320.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.EnterController">
+<VBox alignment="CENTER" prefHeight="320.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: LIGHTCYAN;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.EnterController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Label fx:id="day" graphicTextGap="8.0">
+   <Label fx:id="day" graphicTextGap="8.0" textFill="BLUEVIOLET">
       <font>
          <Font size="18.0" />
       </font>
@@ -18,22 +18,22 @@
          <Insets top="20.0" />
       </VBox.margin>
    </Label>
-   <Label fx:id="date">
+   <Label fx:id="date" textFill="BLUEVIOLET">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
 
-    <Label fx:id="time">
+    <Label fx:id="time" textFill="BLUEVIOLET">
       <font>
-         <Font size="18.0" />
+         <Font size="20.0" />
       </font></Label>
-   <Label fx:id="status">
+   <Label fx:id="status" textFill="BLUEVIOLET">
       <font>
          <Font name="System Bold" size="24.0" />
       </font>
    </Label>
-    <Button onAction="#setPlan" prefHeight="10.0" prefWidth="108.0" text="Change Schedual">
+    <Button onAction="#setPlan" prefHeight="10.0" prefWidth="108.0" style="-fx-background-color: orange;" text="Change Schedual">
       <VBox.margin>
          <Insets top="20.0" />
       </VBox.margin></Button>

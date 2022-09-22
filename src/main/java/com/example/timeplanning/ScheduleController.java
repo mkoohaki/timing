@@ -149,14 +149,16 @@ public class ScheduleController implements Initializable {
 
         TableColumn<Activity, Button> actionColumn = new TableColumn<>("Action");
         actionColumn.setMinWidth(80);
-
+//        Button button = new Button("Edit");
+//        actionColumn.add(button, 1);
+//        button.setOnAction();
         table = new TableView<>();
         try {
             table.setItems(getActivity());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        table.setStyle("-fx-background-color: blue;");
         table.getColumns().addAll(activityColumn, startColumn, endColumn, actionColumn);
         scene.getChildren().addAll(table);
     }
