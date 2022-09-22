@@ -24,7 +24,8 @@ public class ScheduleController implements Initializable {
 
     TableView<Activity> table;
     final ObservableList<Activity> data = FXCollections.observableArrayList();
-    Alert a = new Alert(Alert.AlertType.NONE);
+    Alert alart = new Alert(Alert.AlertType.NONE);
+    private Button button;
 
     @FXML
     protected void add(ActionEvent event) throws Exception {
@@ -58,33 +59,33 @@ public class ScheduleController implements Initializable {
         String[][] rows = db.getAllRows();
 
         if(activity.equals("") || start.equals("") || end.equals("")) {
-            a.setAlertType(Alert.AlertType.ERROR);
-            a.setContentText("Please fill out the form");
-            a.show();
+            alart.setAlertType(Alert.AlertType.ERROR);
+            alart.setContentText("Please fill out the form");
+            alart.show();
             return false;
         }
         for (String[] row : rows) {
             if (Objects.equals(row[0], activity)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Activity already exists");
-                a.show();
+                alart.setAlertType(Alert.AlertType.ERROR);
+                alart.setContentText("Activity already exists");
+                alart.show();
                 return false;
             } else if (Objects.equals(row[1], start)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Time has interruption");
-                a.show();
+                alart.setAlertType(Alert.AlertType.ERROR);
+                alart.setContentText("Time has interruption");
+                alart.show();
                 return false;
             } else if (Objects.equals(row[2], end)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Time has interruption");
-                a.show();
+                alart.setAlertType(Alert.AlertType.ERROR);
+                alart.setContentText("Time has interruption");
+                alart.show();
                 return false;
             }
         }
         if (start.equals(end)) {
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Time has interruption");
-                a.show();
+                alart.setAlertType(Alert.AlertType.ERROR);
+                alart.setContentText("Time has interruption");
+                alart.show();
                 return false;
         }
 
@@ -104,21 +105,21 @@ public class ScheduleController implements Initializable {
                 eTime = LocalTime.of(Integer.parseInt(endRow[0]), Integer.parseInt(endRow[1]));
 
                 if (sTime.isBefore(timeStart) && eTime.isAfter(timeStart)) {
-                    a.setAlertType(Alert.AlertType.ERROR);
-                    a.setContentText("Time has interruption");
-                    a.show();
+                    alart.setAlertType(Alert.AlertType.ERROR);
+                    alart.setContentText("Time has interruption");
+                    alart.show();
                     return false;
                 }
                 if (sTime.isBefore(timeEnd) && eTime.isAfter(timeEnd)) {
-                    a.setAlertType(Alert.AlertType.ERROR);
-                    a.setContentText("Time has interruption");
-                    a.show();
+                    alart.setAlertType(Alert.AlertType.ERROR);
+                    alart.setContentText("Time has interruption");
+                    alart.show();
                     return false;
                 }
                 if (sTime.isAfter(timeStart) && eTime.isBefore(timeEnd)) {
-                    a.setAlertType(Alert.AlertType.ERROR);
-                    a.setContentText("Time has interruption");
-                    a.show();
+                    alart.setAlertType(Alert.AlertType.ERROR);
+                    alart.setContentText("Time has interruption");
+                    alart.show();
                     return false;
                 }
             }
@@ -147,19 +148,21 @@ public class ScheduleController implements Initializable {
         activityColumn.setMinWidth(95);
         endColumn.setCellValueFactory(new PropertyValueFactory<>("end"));
 
-        TableColumn<Activity, Button> actionColumn = new TableColumn<>("Action");
-        actionColumn.setMinWidth(80);
-//        Button button = new Button("Edit");
-//        actionColumn.add(button, 1);
-//        button.setOnAction();
+        TableColumn<Activity, String> editColumn = new TableColumn<>("Edit");
+        editColumn.setMinWidth(40);
+        editColumn.setCellValueFactory(new PropertyValueFactory<>("editButton"));
+
+        TableColumn<Activity, String> deleteColumn = new TableColumn<>("Delete");
+        deleteColumn.setMinWidth(40);
+        deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
+
         table = new TableView<>();
         try {
             table.setItems(getActivity());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        table.setStyle("-fx-background-color: blue;");
-        table.getColumns().addAll(activityColumn, startColumn, endColumn, actionColumn);
+        table.getColumns().addAll(activityColumn, startColumn, endColumn, editColumn, deleteColumn);
         scene.getChildren().addAll(table);
     }
 
@@ -188,5 +191,15 @@ public class ScheduleController implements Initializable {
     public void refreshTable() {
         data.clear();
         creatingTable();
+    }
+
+    @FXML
+    protected void edit(ActionEvent event) throws Exception {
+        try {
+            Partials.windowOpen("enter", "Timing Plan", 320, 320);
+            Partials.windowClose(event);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

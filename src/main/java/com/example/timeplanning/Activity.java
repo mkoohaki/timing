@@ -1,10 +1,14 @@
 package com.example.timeplanning;
 
+import javafx.scene.control.Button;
+
 public class Activity {
 
     private String activity;
     private String start;
     private String end;
+    private Button editButton;
+    private Button deleteButton;
 
     public Activity() {
         this.activity = "";
@@ -16,6 +20,8 @@ public class Activity {
         this.activity = activity;
         this.start = start;
         this.end = end;
+        this.editButton = new Button("E");
+        this.deleteButton = new Button("D");
     }
 
     public String getActivity() {
@@ -40,5 +46,21 @@ public class Activity {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public Button getEditButton() {
+        return editButton;
+    }
+
+    public void setEditButton(Button button) {
+        this.editButton = editButton;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public void setDeleteButton(Button deleteButton) {
+        this.deleteButton = deleteButton;
     }
 }
