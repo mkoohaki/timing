@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EnterController implements Initializable {
@@ -42,7 +43,7 @@ public class EnterController implements Initializable {
         Timenow();
         try {
             AccountDatabase db = new AccountDatabase();
-            String[][] rows = db.getAllRows();
+            ArrayList<String[]> rows = db.getAllRows();
 
             for(String[] row : rows) {
                 if (row[1] != null) {

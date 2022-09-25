@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="scene" prefHeight="620.0" prefWidth="320.0" style="-fx-background-color: LIGHTCYAN;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
+   <Button style="-fx-background-color: red;"/>
    <children>
       <Button layoutX="270.0" layoutY="552.0" mnemonicParsing="false" onAction="#add" style="-fx-background-color: green;" text="Add" textFill="WHITE" />
       <TextField fx:id="activityText" layoutX="11.0" layoutY="552.0" prefHeight="26.0" prefWidth="132.0" />

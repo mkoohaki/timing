@@ -1,6 +1,7 @@
 package com.example.timeplanning.database;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DBTest {
@@ -10,7 +11,7 @@ public class DBTest {
             AccountDatabase db = new AccountDatabase();
             //db.insertRow("Coding", "19:45", "21:00");
 
-            String[][] rows = db.getAllRows();
+            ArrayList<String[]> rows = db.getAllRows();
             int row = 0;
             for(String[] columns : rows) {
                 row++;

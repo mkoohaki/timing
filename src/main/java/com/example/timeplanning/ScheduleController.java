@@ -24,7 +24,7 @@ public class ScheduleController implements Initializable {
 
     TableView<Activity> table;
     final ObservableList<Activity> data = FXCollections.observableArrayList();
-    Alert alart = new Alert(Alert.AlertType.NONE);
+    Alert alert = new Alert(Alert.AlertType.NONE);
     private Button button;
 
     @FXML
@@ -56,36 +56,36 @@ public class ScheduleController implements Initializable {
     private boolean checkActivity(String activity, String start, String end) throws SQLException {
 
         AccountDatabase db = new AccountDatabase();
-        String[][] rows = db.getAllRows();
+        ArrayList<String[]> rows = db.getAllRows();
 
         if(activity.equals("") || start.equals("") || end.equals("")) {
-            alart.setAlertType(Alert.AlertType.ERROR);
-            alart.setContentText("Please fill out the form");
-            alart.show();
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("Please fill out the form");
+            alert.show();
             return false;
         }
         for (String[] row : rows) {
             if (Objects.equals(row[0], activity)) {
-                alart.setAlertType(Alert.AlertType.ERROR);
-                alart.setContentText("Activity already exists");
-                alart.show();
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Activity already exists");
+                alert.show();
                 return false;
             } else if (Objects.equals(row[1], start)) {
-                alart.setAlertType(Alert.AlertType.ERROR);
-                alart.setContentText("Time has interruption");
-                alart.show();
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Time has interruption");
+                alert.show();
                 return false;
             } else if (Objects.equals(row[2], end)) {
-                alart.setAlertType(Alert.AlertType.ERROR);
-                alart.setContentText("Time has interruption");
-                alart.show();
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Time has interruption");
+                alert.show();
                 return false;
             }
         }
         if (start.equals(end)) {
-                alart.setAlertType(Alert.AlertType.ERROR);
-                alart.setContentText("Time has interruption");
-                alart.show();
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Time has interruption");
+                alert.show();
                 return false;
         }
 
@@ -105,21 +105,21 @@ public class ScheduleController implements Initializable {
                 eTime = LocalTime.of(Integer.parseInt(endRow[0]), Integer.parseInt(endRow[1]));
 
                 if (sTime.isBefore(timeStart) && eTime.isAfter(timeStart)) {
-                    alart.setAlertType(Alert.AlertType.ERROR);
-                    alart.setContentText("Time has interruption");
-                    alart.show();
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setContentText("Time has interruption");
+                    alert.show();
                     return false;
                 }
                 if (sTime.isBefore(timeEnd) && eTime.isAfter(timeEnd)) {
-                    alart.setAlertType(Alert.AlertType.ERROR);
-                    alart.setContentText("Time has interruption");
-                    alart.show();
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setContentText("Time has interruption");
+                    alert.show();
                     return false;
                 }
                 if (sTime.isAfter(timeStart) && eTime.isBefore(timeEnd)) {
-                    alart.setAlertType(Alert.AlertType.ERROR);
-                    alart.setContentText("Time has interruption");
-                    alart.show();
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setContentText("Time has interruption");
+                    alert.show();
                     return false;
                 }
             }
@@ -137,7 +137,7 @@ public class ScheduleController implements Initializable {
 
     public void creatingTable() {
         TableColumn<Activity, String> activityColumn = new TableColumn<>("Activity");
-        activityColumn.setMinWidth(150);
+        activityColumn.setMinWidth(130);
         activityColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
 
         TableColumn<Activity, String> startColumn = new TableColumn<>("Start");
@@ -150,10 +150,13 @@ public class ScheduleController implements Initializable {
 
         TableColumn<Activity, String> editColumn = new TableColumn<>("Edit");
         editColumn.setMinWidth(40);
+        editColumn.setStyle("-fx-background-color: yellow");
         editColumn.setCellValueFactory(new PropertyValueFactory<>("editButton"));
 
         TableColumn<Activity, String> deleteColumn = new TableColumn<>("Delete");
         deleteColumn.setMinWidth(40);
+        deleteColumn.setId("del");
+        deleteColumn.setStyle("-fx-background-color: red");
         deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
         table = new TableView<>();
@@ -171,10 +174,10 @@ public class ScheduleController implements Initializable {
         try {
             ObservableList<Activity> activities = FXCollections.observableArrayList();
             AccountDatabase db = new AccountDatabase();
-            String[][] rows = db.getAllRows();
+            ArrayList<String[]> rows = db.getAllRows();
 
-            for(int i=0; i<rows.length; i++) {
-                activities.add(new Activity(rows[i][0], rows[i][1], rows[i][2]));
+            for(int i=0; i<rows.size(); i++) {
+                activities.add(new Activity(rows.get(i)[0], rows.get(i)[1], rows.get(i)[2]));
             }
             return activities;
         } catch(Exception e) {

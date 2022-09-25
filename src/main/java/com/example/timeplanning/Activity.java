@@ -61,6 +61,5 @@ public class Activity {
     }
 
     public void setDeleteButton(Button deleteButton) {
-        this.deleteButton = deleteButton;
-    }
+        this.deleteButton = deleteButton; }
 }

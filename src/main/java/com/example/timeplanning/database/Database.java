@@ -3,6 +3,7 @@ package com.example.timeplanning.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class Database {
     private String username = "root", password ="";
@@ -20,7 +21,7 @@ public abstract class Database {
     }
 
     public abstract int insertRow(String...columns) throws SQLException;
-    public abstract String[][] getAllRows() throws SQLException;
+    public abstract ArrayList<String[]> getAllRows() throws SQLException;
     public abstract String[] getAllColumns() throws SQLException;
 
 }
