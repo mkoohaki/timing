@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="scene" prefHeight="620.0" prefWidth="320.0" style="-fx-background-color: LIGHTCYAN;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.timeplanning.ScheduleController">
    <children>
@@ -11,5 +15,19 @@
       <TextField fx:id="startText" layoutX="148.0" layoutY="552.0" prefHeight="26.0" prefWidth="55.0" />
       <TextField fx:id="endText" layoutX="209.0" layoutY="552.0" prefHeight="26.0" prefWidth="55.0" />
       <Button layoutX="140.0" layoutY="587.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: orange;" text="Back" />
+      <Label layoutX="79.0" layoutY="6.0" prefHeight="27.0" prefWidth="161.0" text="Scheduled Activities" textAlignment="CENTER" textFill="#2b0ae8">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table_info" layoutY="37.0" prefHeight="474.0" prefWidth="320.0">
+        <columns>
+          <TableColumn fx:id="col_activity" prefWidth="137.0" text="Activity" />
+          <TableColumn fx:id="col_start" prefWidth="45.0" text="Start" />
+            <TableColumn fx:id="col_end" prefWidth="45.0" text="End" />
+            <TableColumn fx:id="col_update" prefWidth="45.0" text="Update" />
+            <TableColumn fx:id="col_delete" prefWidth="45.0" text="Delete" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

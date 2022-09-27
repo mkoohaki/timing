@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.sql.SQLException;
@@ -16,16 +17,94 @@ import java.util.*;
 
 public class ScheduleController implements Initializable {
 
+    Alert alert = new Alert(Alert.AlertType.NONE);
+
     @FXML
     TextField activityText, startText, endText;
 
     @FXML
-    AnchorPane scene;
+    private TableView<Activity> table_info;
 
-    TableView<Activity> table;
-    final ObservableList<Activity> data = FXCollections.observableArrayList();
-    Alert alert = new Alert(Alert.AlertType.NONE);
-    private Button button;
+    @FXML
+    private TableColumn<Activity, String> col_activity;
+
+    @FXML
+    private TableColumn<Activity, String> col_start;
+
+    @FXML
+    private TableColumn<Activity, String> col_end;
+
+    @FXML
+    private TableColumn<Activity, Button> col_update;
+
+    @FXML
+    private TableColumn<Activity, Button> col_delete;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initTable();
+        loadData();
+    }
+
+    private void initTable() {
+        initCols();
+        initCols();
+    }
+
+    private void initCols() {
+        col_activity.setCellValueFactory(new PropertyValueFactory<>("activity"));
+        col_start.setCellValueFactory(new PropertyValueFactory<>("start"));
+        col_end.setCellValueFactory(new PropertyValueFactory<>("end"));
+        col_update.setCellValueFactory(new PropertyValueFactory<>("update"));
+        col_delete.setCellValueFactory(new PropertyValueFactory<>("delete"));
+
+        editTableCols();
+    }
+
+    private void editTableCols() {
+        col_activity.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_activity.setOnEditCommit(e -> {
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setActivity(e.getNewValue());
+        });
+
+        col_start.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_start.setOnEditCommit(e -> {
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setStart(e.getNewValue());
+        });
+
+        col_end.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_end.setOnEditCommit(e -> {
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setEnd(e.getNewValue());
+        });
+
+        table_info.setEditable(true);
+    }
+
+    private void loadData() {
+
+        try {
+            table_info.setItems(getActivity());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public static ObservableList<Activity> getActivity() throws SQLException {
+
+        try {
+            ObservableList<Activity> activities = FXCollections.observableArrayList();
+            AccountDatabase db = new AccountDatabase();
+            ArrayList<String[]> rows = db.getAllRows();
+
+            for(int i=0; i<rows.size(); i++) {
+                activities.add(new Activity(rows.get(i)[0], rows.get(i)[1], rows.get(i)[2], new Button("U"), new Button("D")));
+            }
+            return activities;
+        } catch(Exception e) {
+            System.out.println("Error: " + e);
+            return null;
+        }
+    }
 
     @FXML
     protected void add(ActionEvent event) throws Exception {
@@ -37,7 +116,7 @@ public class ScheduleController implements Initializable {
             activityText.setText("");
             startText.setText("");
             endText.setText("");
-            refreshTable();
+            loadData();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -128,81 +207,8 @@ public class ScheduleController implements Initializable {
         return true;
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        creatingTable();
-    }
-
-    public void creatingTable() {
-        TableColumn<Activity, String> activityColumn = new TableColumn<>("Activity");
-        activityColumn.setMinWidth(130);
-        activityColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
-
-        TableColumn<Activity, String> startColumn = new TableColumn<>("Start");
-        activityColumn.setMinWidth(95);
-        startColumn.setCellValueFactory(new PropertyValueFactory<>("start"));
-
-        TableColumn<Activity, String> endColumn = new TableColumn<>("End");
-        activityColumn.setMinWidth(95);
-        endColumn.setCellValueFactory(new PropertyValueFactory<>("end"));
-
-        TableColumn<Activity, String> editColumn = new TableColumn<>("Edit");
-        editColumn.setMinWidth(40);
-        editColumn.setStyle("-fx-background-color: yellow");
-        editColumn.setCellValueFactory(new PropertyValueFactory<>("editButton"));
-
-        TableColumn<Activity, String> deleteColumn = new TableColumn<>("Delete");
-        deleteColumn.setMinWidth(40);
-        deleteColumn.setId("del");
-        deleteColumn.setStyle("-fx-background-color: red");
-        deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
-
-        table = new TableView<>();
-        try {
-            table.setItems(getActivity());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        table.getColumns().addAll(activityColumn, startColumn, endColumn, editColumn, deleteColumn);
-        scene.getChildren().addAll(table);
-    }
-
-    public ObservableList<Activity> getActivity() throws SQLException {
-
-        try {
-            ObservableList<Activity> activities = FXCollections.observableArrayList();
-            AccountDatabase db = new AccountDatabase();
-            ArrayList<String[]> rows = db.getAllRows();
-
-            for(int i=0; i<rows.size(); i++) {
-                activities.add(new Activity(rows.get(i)[0], rows.get(i)[1], rows.get(i)[2]));
-            }
-            return activities;
-        } catch(Exception e) {
-            System.out.println("Error: " + e);
-            return null;
-        }
-    }
-
     public void saveActivity(String activity, String start, String end) throws SQLException {
         AccountDatabase db = new AccountDatabase();
         db.insertRow(activity, start, end);
-    }
-
-    public void refreshTable() {
-        data.clear();
-        creatingTable();
-    }
-
-    @FXML
-    protected void edit(ActionEvent event) throws Exception {
-        try {
-            Partials.windowOpen("enter", "Timing Plan", 320, 320);
-            Partials.windowClose(event);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }

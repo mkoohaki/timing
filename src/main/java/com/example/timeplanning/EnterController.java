@@ -68,7 +68,6 @@ public class EnterController implements Initializable {
             DateTimeFormatter timing = DateTimeFormatter.ofPattern("HH:mm:ss");
             while(!stop) {
                 try{
-                    System.out.println("S");
                     Thread.sleep(1000);
                 } catch (Exception e) {
                     System.out.println(e);
