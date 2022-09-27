@@ -92,4 +92,17 @@ public class AccountDatabase extends Database {
         }
         return data;
     }
+
+    @Override
+    public void update(String... columns) throws SQLException {
+        String sql = String.format("UPDATE `%s` SET `activity` = ?, `start` = ?, `end` = ? WHERE `activity` = ?", TABLE);
+
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        prepareStatement.setString(1, columns[1]);
+        prepareStatement.setString(2, columns[2]);
+        prepareStatement.setString(3, columns[3]);
+        prepareStatement.setString(4, columns[0]);
+        prepareStatement.executeUpdate();
+    }
+
 }

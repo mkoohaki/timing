@@ -1,5 +1,6 @@
 package com.example.timeplanning;
 
+import com.example.timeplanning.database.AccountDatabase;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
@@ -33,23 +34,44 @@ public class Activity {
                 "-fx-min-width: 26px; " +
                 "-fx-min-height: 26px; " +
                 "-fx-background-radius: 13px;");
-//        delete.setOnAction(e -> {
-//            try {
+        update.setOnAction(e -> {
+            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+            String newActivity = null, newStart = null, newEnd = null;
+            for (Activity act : activities) {
+                if(act.getUpdate() == update) {
+                    newActivity = act.getActivity();
+                    newStart = act.getStart();
+                    newEnd = act.getEnd();
+                }
+            }
+            String oldActivity = getActivity();
+            if(newActivity != null && newStart != null && newEnd != null) {
+                System.out.println(newActivity);
+                System.out.println(newStart);
+                System.out.println(newEnd);
+                try {
+                    AccountDatabase db = new AccountDatabase();
+                    db.update(oldActivity, newActivity, newStart, newEnd);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+
+                System.out.println();
+//            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+//            assert activities != null;
 //
-//                ObservableList<Activity> activities = ScheduleController.getActivity();
-//                assert activities != null;
-//                for (Activity act : activities) {
-//                    if (act.getDeleteButton() == delete) {
-//                        System.out.println(act.getActivity());
-//                    }
+//            for (Activity act : activities) {
+//                System.out.println(act.getUpdate());
+//                if (act.getUpdate() == update) {
+//                    System.out.println(act.getActivity());
 //                }
-//                //System.out.println(activities.get(0).getActivity());
-//                    //https://www.youtube.com/watch?v=5DjvFTa2Q8o&ab_channel=RashidIqbal
-////                }
-//            } catch (SQLException ex) {
-//                ex.printStackTrace();
 //            }
-//        });
+            //System.out.println(activities.get(0).getActivity());
+            //https://www.youtube.com/watch?v=5DjvFTa2Q8o&ab_channel=RashidIqbal
+//                }
+        });
     }
 
     public String getActivity() {

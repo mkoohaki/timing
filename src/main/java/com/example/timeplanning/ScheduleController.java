@@ -18,6 +18,7 @@ import java.util.*;
 public class ScheduleController implements Initializable {
 
     Alert alert = new Alert(Alert.AlertType.NONE);
+    public static TableView<Activity> table_info_2;
 
     @FXML
     TextField activityText, startText, endText;
@@ -47,6 +48,7 @@ public class ScheduleController implements Initializable {
     }
 
     private void initTable() {
+        table_info_2 = table_info;
         initCols();
         initCols();
     }
@@ -89,7 +91,7 @@ public class ScheduleController implements Initializable {
         }
     }
 
-        public static ObservableList<Activity> getActivity() throws SQLException {
+    public static ObservableList<Activity> getActivity() throws SQLException {
 
         try {
             ObservableList<Activity> activities = FXCollections.observableArrayList();
