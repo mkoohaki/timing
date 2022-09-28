@@ -50,7 +50,6 @@ public class ScheduleController implements Initializable {
     private void initTable() {
         table_info_2 = table_info;
         initCols();
-        initCols();
     }
 
     private void initCols() {

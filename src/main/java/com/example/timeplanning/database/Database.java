@@ -24,5 +24,6 @@ public abstract class Database {
     public abstract ArrayList<String[]> getAllRows() throws SQLException;
     public abstract String[] getAllColumns() throws SQLException;
     public abstract void update(String...columns) throws SQLException;
+    public abstract void delete(String activity) throws SQLException;
 
 }

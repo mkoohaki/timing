@@ -44,6 +44,7 @@ public class Activity {
                     newEnd = act.getEnd();
                 }
             }
+            System.out.println(newActivity);
             String oldActivity = getActivity();
             if(newActivity != null && newStart != null && newEnd != null) {
                 System.out.println(newActivity);
@@ -58,7 +59,8 @@ public class Activity {
 
             }
 
-                System.out.println();
+
+
 //            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
 //            assert activities != null;
 //
@@ -71,6 +73,23 @@ public class Activity {
             //System.out.println(activities.get(0).getActivity());
             //https://www.youtube.com/watch?v=5DjvFTa2Q8o&ab_channel=RashidIqbal
 //                }
+        });
+        delete.setOnAction(e -> {
+            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+            String pkid = null;
+            for (Activity act : activities) {
+                if(act.getDelete() == delete) {
+                    pkid = act.getActivity();
+                }
+            }
+            System.out.println(pkid);
+            AccountDatabase db = null;
+            try {
+                db = new AccountDatabase();
+                db.delete(pkid);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 

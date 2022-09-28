@@ -105,4 +105,12 @@ public class AccountDatabase extends Database {
         prepareStatement.executeUpdate();
     }
 
+    @Override
+    public void delete(String activity) throws SQLException {
+        String sql = String.format("DELETE FROM `%s` WHERE `activity` = ?", TABLE);
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        prepareStatement.setString(1, activity);
+        prepareStatement.executeUpdate();
+    }
+
 }
