@@ -36,6 +36,7 @@ public class Activity {
                 "-fx-background-radius: 13px;");
         update.setOnAction(e -> {
             ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+            //String activitie = ScheduleController.table_info_2.getItems().get(getActivity());
             String newActivity = null, newStart = null, newEnd = null;
             for (Activity act : activities) {
                 if(act.getUpdate() == update) {
@@ -44,7 +45,7 @@ public class Activity {
                     newEnd = act.getEnd();
                 }
             }
-            System.out.println(newActivity);
+            System.out.println();
             String oldActivity = getActivity();
             if(newActivity != null && newStart != null && newEnd != null) {
                 System.out.println(newActivity);
@@ -76,6 +77,8 @@ public class Activity {
         });
         delete.setOnAction(e -> {
             ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+            //ObservableList<Activity> activities = ScheduleController.table_info_2.getRowFactory();
+
             String pkid = null;
             for (Activity act : activities) {
                 if(act.getDelete() == delete) {
@@ -83,11 +86,13 @@ public class Activity {
                 }
             }
             System.out.println(pkid);
-            AccountDatabase db = null;
+            AccountDatabase db;
             try {
                 db = new AccountDatabase();
                 db.delete(pkid);
-            } catch (SQLException ex) {
+                Partials.windowOpen("schedule", "Timing Plan", 620, 320);
+                Partials.windowClose(e);
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });

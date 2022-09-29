@@ -81,7 +81,7 @@ public class ScheduleController implements Initializable {
         table_info.setEditable(true);
     }
 
-    private void loadData() {
+    public void loadData() {
 
         try {
             table_info.setItems(getActivity());
