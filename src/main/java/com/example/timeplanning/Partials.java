@@ -18,6 +18,7 @@ public class Partials {
         primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(root, height, width));
         primaryStage.setResizable(false);
+//        root.getStylesheets().add("/CSS/stylesheet.css");
         primaryStage.show();
     }
 

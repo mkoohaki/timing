@@ -20,13 +20,13 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="97.0" layoutY="518.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="125.0" style="-fx-background-color: red;" text="Delete row" />
       <TableView fx:id="table_info" layoutY="37.0" prefHeight="474.0" prefWidth="320.0">
         <columns>
-          <TableColumn fx:id="col_activity" prefWidth="137.0" text="Activity" />
-          <TableColumn fx:id="col_start" prefWidth="45.0" text="Start" />
-            <TableColumn fx:id="col_end" prefWidth="45.0" text="End" />
-            <TableColumn fx:id="col_update" prefWidth="45.0" text="Update" />
-            <TableColumn fx:id="col_delete" prefWidth="45.0" text="Delete" />
+          <TableColumn fx:id="col_activity" prefWidth="165.0" text="Activity" />
+          <TableColumn fx:id="col_start" prefWidth="50.0" text="Start" />
+            <TableColumn fx:id="col_end" prefWidth="50.0" text="End" />
+            <TableColumn fx:id="col_update" prefWidth="50.0" text="Update" />
         </columns>
       </TableView>
    </children>

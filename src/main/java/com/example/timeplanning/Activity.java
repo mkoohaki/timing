@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Activity {
 
     private String activity, start, end;
-    private Button update, delete;
+    private Button update;
 
     public Activity() {
         this.activity = "";
@@ -17,23 +17,19 @@ public class Activity {
         this.end = "";
     }
 
-    public Activity(String activity, String start, String end, Button update, Button delete) {
+    public Activity(String activity, String start, String end, Button update) {
         this.activity = activity;
         this.start = start;
         this.end = end;
         this.update = update;
-        this.delete = delete;
 
         update.setStyle("-fx-background-color: yellow; " +
                 "-fx-font-weight: 900; " +
                 "-fx-min-width: 26px; " +
                 "-fx-min-height: 26px; " +
                 "-fx-background-radius: 13px;");
-        delete.setStyle("-fx-background-color: red; " +
-                "-fx-font-weight: 900; " +
-                "-fx-min-width: 26px; " +
-                "-fx-min-height: 26px; " +
-                "-fx-background-radius: 13px;");
+
+
         update.setOnAction(e -> {
             ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
             //String activitie = ScheduleController.table_info_2.getItems().get(getActivity());
@@ -75,27 +71,27 @@ public class Activity {
             //https://www.youtube.com/watch?v=5DjvFTa2Q8o&ab_channel=RashidIqbal
 //                }
         });
-        delete.setOnAction(e -> {
-            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
-            //ObservableList<Activity> activities = ScheduleController.table_info_2.getRowFactory();
-
-            String pkid = null;
-            for (Activity act : activities) {
-                if(act.getDelete() == delete) {
-                    pkid = act.getActivity();
-                }
-            }
-            System.out.println(pkid);
-            AccountDatabase db;
-            try {
-                db = new AccountDatabase();
-                db.delete(pkid);
-                Partials.windowOpen("schedule", "Timing Plan", 620, 320);
-                Partials.windowClose(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+//        delete.setOnAction(e -> {
+//            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+//            //ObservableList<Activity> activities = ScheduleController.table_info_2.getRowFactory();
+//
+//            String pkid = null;
+//            for (Activity act : activities) {
+//                if(act.getDelete() == delete) {
+//                    pkid = act.getActivity();
+//                }
+//            }
+//            System.out.println(pkid);
+//            AccountDatabase db;
+//            try {
+//                db = new AccountDatabase();
+//                db.delete(pkid);
+//                Partials.windowOpen("schedule", "Timing Plan", 620, 320);
+//                Partials.windowClose(e);
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        });
     }
 
     public String getActivity() {
@@ -128,13 +124,5 @@ public class Activity {
 
     public void setUpdate(Button update) {
         this.update = update;
-    }
-
-    public Button getDelete() {
-        return delete;
-    }
-
-    public void setDelete(Button delete) {
-        this.delete = delete;
     }
 }

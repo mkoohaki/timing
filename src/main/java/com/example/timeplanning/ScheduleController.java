@@ -5,11 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -38,11 +43,9 @@ public class ScheduleController implements Initializable {
     @FXML
     private TableColumn<Activity, Button> col_update;
 
-    @FXML
-    private TableColumn<Activity, Button> col_delete;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         initTable();
         loadData();
     }
@@ -57,7 +60,6 @@ public class ScheduleController implements Initializable {
         col_start.setCellValueFactory(new PropertyValueFactory<>("start"));
         col_end.setCellValueFactory(new PropertyValueFactory<>("end"));
         col_update.setCellValueFactory(new PropertyValueFactory<>("update"));
-        col_delete.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
         editTableCols();
     }
@@ -98,7 +100,7 @@ public class ScheduleController implements Initializable {
             ArrayList<String[]> rows = db.getAllRows();
 
             for(int i=0; i<rows.size(); i++) {
-                activities.add(new Activity(rows.get(i)[0], rows.get(i)[1], rows.get(i)[2], new Button("U"), new Button("D")));
+                activities.add(new Activity(rows.get(i)[0], rows.get(i)[1], rows.get(i)[2], new Button("U")));
             }
             return activities;
         } catch(Exception e) {
@@ -118,6 +120,31 @@ public class ScheduleController implements Initializable {
             startText.setText("");
             endText.setText("");
             loadData();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    protected void delete(ActionEvent event) throws Exception {
+        try {
+
+            ObservableList<Activity> activities = ScheduleController.table_info_2.getSelectionModel().getSelectedItems();
+
+            String pkid = null;
+            for (Activity act : activities) {
+                    pkid = act.getActivity();
+
+            }
+            System.out.println(pkid);
+            AccountDatabase db;
+            try {
+                db = new AccountDatabase();
+                db.delete(pkid);
+                loadData();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

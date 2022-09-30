@@ -22,9 +22,13 @@
       <change afterPath="$PROJECT_DIR$/../malwart - Copy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/Partials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/Partials.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/timeplanning/ScheduleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/schedule.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/timeplanning/schedule.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/Activity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/Activity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/Partials.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/Partials.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/ScheduleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/timeplanning/schedule.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/timeplanning/schedule.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
